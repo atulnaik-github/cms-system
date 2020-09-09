@@ -16750,6 +16750,12 @@ be a descendant of the grid when it is being dragged.
   margin-top: 2px;
 }
 
+.app-content small.input-group{
+  position: absolute !important;
+  width: 100%;
+  margin-top: 2px;
+}
+
 .login-form .form-group small{
   position: absolute !important;
   width: 100%;

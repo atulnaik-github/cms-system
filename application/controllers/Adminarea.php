@@ -10,8 +10,10 @@ class Adminarea extends MY_Controller {
 	}
 
 	public function admin_dashboard()
-	{
-		$this->adminBackend('adminarea/dashboard');
+	{	
+		$data['user'] = $this->op->totalUsers();
+		$data['post'] = $this->op->totalPost();
+		$this->adminBackend('adminarea/dashboard',$data,true);
 	}
 
 	// this will add the posts
@@ -33,8 +35,8 @@ class Adminarea extends MY_Controller {
 				$date = 'IMG'.date('Ymdhis');
 				$filename = $_FILES["post_img"]["name"];
 				$temp_name = $_FILES["post_img"]["tmp_name"];
-				if (!file_exists('./upload/post')) {
-					mkdir('./upload/post', 0777, true);
+				if (!file_exists('upload/post')) {
+					mkdir('upload/post', 0777, true);
 				}
 				$filename = $date;
 				$folder = 'upload/post/'.$filename;
@@ -265,8 +267,8 @@ class Adminarea extends MY_Controller {
 				$date = 'IMG'.date('Ymdhis');
 				$filename = $_FILES['user_img']['name'];
 				$temp_name = $_FILES['user_img']['tmp_name'];
-				if (!file_exists('./upload/user')) {
-					mkdir('./upload/user', 0777, true);
+				if (!file_exists('upload/user')) {
+					mkdir('upload/user', 0777, true);
 				}
 				$filename = $date;
 				$folder = 'upload/user/'.$date;
@@ -282,6 +284,7 @@ class Adminarea extends MY_Controller {
 					'gender' => $formdata['gender'], 
 					'mobile_number' => $formdata['mobile'], 
 					'user_address' => $formdata['address'], 
+					'dob' => $formdata['dob'], 
 					'country' => $formdata['country'], 
 					'state' => $formdata['state'], 
 					'city' => $formdata['city'], 
@@ -318,7 +321,7 @@ class Adminarea extends MY_Controller {
 	public function user_list()
 	{
 		$para = array('user_role' => '0' );
-		$userData['user_details'] = $this->op->get($this->TBLUSERS,$para);
+		$userData['user_details'] = $this->op->getPostCount_and_userDetails();
 		$this->adminBackend('adminarea/user-list',$userData,true);
 	}
 
@@ -370,6 +373,7 @@ class Adminarea extends MY_Controller {
 						'mobile_number' =>$formdata['mobile'],
 						'gender' =>$formdata['gender'],
 						'user_address' =>$formdata['address'],
+						'dob' =>$formdata['dob'],
 						'country' =>$formdata['country'],
 						'state' =>$formdata['state'],
 						'city' =>$formdata['city'],

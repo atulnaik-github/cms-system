@@ -7,8 +7,8 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="<?= site_url('user/dashboard'); ?>">CMS</a>
-                <a class="navbar-brand hidden" href="<?= site_url('user/dashboard'); ?>">C</a>
+                <a class="navbar-brand" href="<?= site_url('user'); ?>">CMS</a>
+                <a class="navbar-brand hidden" href="<?= site_url('user'); ?>">C</a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -26,7 +26,7 @@
                     </li> -->
                     <!-- <h3 class="menu-title"></h3> -->
                     <li class="active">
-                        <a href="<?= site_url('user/dashboard'); ?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <a href="<?= site_url('user'); ?>"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file-text"></i>Post</a>
@@ -36,7 +36,7 @@
                         </ul>
                     </li>
                      <li>
-                        <a href="<?= site_url('user/setting'); ?>"> <i class="menu-icon fa fa-cog"></i>Edit Profile</a>
+                        <a href="<?= site_url('user/user-setting'); ?>"> <i class="menu-icon fa fa-cog"></i>Edit Profile</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

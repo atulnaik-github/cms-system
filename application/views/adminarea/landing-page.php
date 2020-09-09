@@ -17,7 +17,7 @@
 		<div class="col-md-8 offset-md-2">
       <div class="row tile">
         <div class="col-md-3">
-          <div class="text-center"><img class="user-img" src="<?= site_url('').$loginUser->user_img; ?>" style="height: 100px; border-radius: 50%; margin-bottom: 20px;"><br>
+          <div class="text-center"><img class="user-img" src="<?= site_url('').$loginUser->user_img; ?>" style="height: 100px; border-radius: 50%; margin-bottom: 20px;" alt="profile picture"><br>
             <h4><?php echo $loginUser->first_name." ".$loginUser->last_name; ?></h4>
             <p>Software Developer</p>
           </div>

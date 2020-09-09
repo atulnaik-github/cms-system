@@ -5,7 +5,7 @@
   <div class="row user">
     <div class="col-md-12">
       <div class="profile">
-        <div class="info"><img class="user-img" src="<?= site_url('').$loginUser->user_img; ?>"><br>
+        <div class="info"><img class="user-img" src="<?= site_url('').$loginUser->user_img; ?>" alt="profile picture"><br>
           <button class="btn btn-sm btn-link text-white" data-toggle="tooltip" data-placement="top" title="" data-original-title="Change Profile Picture"><i class="fa fa-edit" data-target="#profile_img" data-toggle="modal"></i></button>
           <h4><?php echo $loginUser->first_name." ".$loginUser->last_name; ?></h4>
           <p>Software Developer</p>
@@ -31,27 +31,33 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Old Password</label>
-                    <input class="form-control" type="password" name="old_password" value="<?php echo set_value('old_password'); ?>">
+                    <input class="form-control" type="text" name="old_password" value="<?php echo set_value('old_password'); ?>">
                     <small><?php echo form_error('old_password'); ?></small>
                   </div>
                 </div>
               </div>
-              <div class="row mb-2">
+              <div class="row mb-4">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <label>New Password</label>
-                    <input class="form-control" type="password" name="new_password" value="">
-                    <small><?php echo form_error('new_password'); ?></small>
+                  <label>New Password</label>
+                  <div class="input-group">
+                    <input class="form-control" type="password" name="new_password" id="new_password" value="">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" onclick="showNewPass()"><i class="fa fa-eye"></i></span>
+                    </div>
                   </div>
+                  <small class="input-group"><?php echo form_error('new_password'); ?></small>
                 </div>
               </div>
-              <div class="row mb-2">
+              <div class="row mb-4">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Confirm Password</label>
-                    <input class="form-control" type="password" name="confirm_password" value="">
-                    <small><?php echo form_error('confirm_password'); ?></small>
+                  <label>Confirm Password</label>
+                  <div class="input-group">
+                    <input class="form-control" type="password" name="confirm_password" id="confirm_password" value="">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" onclick="showConfirmPass()"><i class="fa fa-eye"></i></span>
+                    </div>
                   </div>
+                  <small class="input-group"><?php echo form_error('confirm_password'); ?></small>
                 </div>
               </div>
               <div class="row mb-10">
@@ -110,3 +116,22 @@
     }
   }
 </script>
+<script>
+    function showNewPass() {
+        var x = document.getElementById("new_password");
+        if (x.type == "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+
+      function showConfirmPass() {
+        var x = document.getElementById("confirm_password");
+        if (x.type == "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+</script> 

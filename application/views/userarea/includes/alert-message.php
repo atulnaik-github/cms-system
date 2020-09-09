@@ -1,5 +1,5 @@
 <div class="row alert-messages">
-  <div class="col-lg-9">
+  <div class="col-lg-12">
     <?php if ($this->session->userdata('successMSG')) { ?>
       <div class="bs-component">
         <div class="alert alert-dismissible alert-success">
@@ -40,13 +40,6 @@
     <?php } ?>
   </div>
 </div>
-<style>
-  .col-lg-9{
-    position: fixed;
-    top: 9.55%;
-    z-index: 3000;
-  }
-</style>
 <script>
   setTimeout(function(){
     $('.alert-messages').delay(150).fadeOut('slow');

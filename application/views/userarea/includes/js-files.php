@@ -38,7 +38,13 @@
             });
         })(jQuery);
     </script>
-    
+
+    <script>
+      setTimeout(function(){
+        $('.alert-messages').delay(150).fadeOut('slow');
+    }, 5000);
+    </script>
+
 </body>
 
 </html>

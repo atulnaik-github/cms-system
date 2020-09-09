@@ -79,12 +79,16 @@ $route['admin/change-password'] = 'Adminarea/changePassword';
 $route['admin/change-profile-image'] = 'Adminarea/changeProfileImage';
 
 // user routes
-$route['user/dashboard'] = 'Userarea/user_dashboard';
+$route['user'] = 'Userarea';
 $route['user/add-post'] = 'Userarea/add_post';
 $route['user/post-list'] = 'Userarea/post_list';
+$route['user/edit-post/:num'] = 'Userarea/edit_post/$1';
+$route['user/edit-post'] = 'Userarea/edit_post';
 $route['user/user-setting'] = 'Userarea/user_setting';
 $route['user/change-password'] = 'Userarea/change_Password';
 $route['user/change-profile-image'] = 'Userarea/changeProfileImage';
+$route['user/basic-details'] = 'Userarea/basicDetails';
+$route['user/change-profile-image'] = 'Userarea/changeProfilePicture';
 
 // login routes
 $route['login'] = 'login';

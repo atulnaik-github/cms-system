@@ -5,7 +5,7 @@
   <div class="row user">
     <div class="col-md-12">
       <div class="profile">
-        <div class="info"><img class="user-img" src="<?= site_url('').$loginUser->user_img; ?>"><br>
+        <div class="info"><img class="user-img" src="<?= site_url('').$loginUser->user_img; ?>" alt="profile picture"><br>
           <button class="btn btn-sm btn-link text-white" data-toggle="tooltip" data-placement="top" title="" data-original-title="Change Profile Picture"><i class="fa fa-edit" data-target="#profile_img" data-toggle="modal"></i></button>
           <h4><?php echo $loginUser->first_name." ".$loginUser->last_name; ?></h4>
           <p>Software Developer</p>

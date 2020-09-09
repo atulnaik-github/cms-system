@@ -52,16 +52,23 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="row">
-								<div class="col-lg-6">
+								<div class="col-lg-4">
 									<div class="form-group mb-4">
 										<label for="mobile">Mobile</label>
 										<input class="form-control" id="mobile" name="mobile" value="<?php echo set_value('mobile'); ?>" type="number" placeholder="Enter mobile number">
 										<small><?php echo form_error('mobile'); ?></small>
 									</div>
 								</div>
-								<div class="col-lg-6">
+								<div class="col-lg-4">
 									<div class="form-group mb-4">
-										<label for="email">Gender</label>
+										<label for="dob">DOB (Date of Birth)</label>
+										<input class="form-control" id="dob" name="dob" value="<?php echo set_value('dob'); ?>" type="date">
+										<small><?php echo form_error('dob'); ?></small>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="form-group mb-4">
+										<label for="gender">Gender</label>
 										<div class="row">
 											<div class="col-lg-6">
 												<div class="animated-radio-button">

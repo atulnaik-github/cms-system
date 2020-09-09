@@ -58,6 +58,11 @@ $config = array(
 			'rules' => 'required|regex_match[/^[0-9]{10}$/]'
 		),
 		array(
+			'field' => 'dob',
+			'label' => 'Date of Birth',
+			'rules' => 'required'
+		),
+		array(
 			'field' => 'address',
 			'label' => 'Address',
 			'rules' => 'required|min_length[10]'
@@ -114,6 +119,18 @@ $config = array(
 			'label' => 'Last Name',
 			'rules' => 'required|min_length[3]'
 		),
+		array(
+			'field' => 'email',
+			'label' => 'Email',
+			'rules' => 'required'
+		),
+		array(
+			'field' => 'mobile',
+			'label' => 'Mobile Number',
+			'rules' => 'required|regex_match[/^[0-9]{10}$/]'
+		),
+	),
+	'user_profile' => array(
 		array(
 			'field' => 'email',
 			'label' => 'Email',

@@ -55,7 +55,7 @@ class Login extends MY_Controller {
 						redirect('admin','refresh',301);
 					} else if ($loginData->user_role == '0') {
 						$this->session->set_userdata($sessionData);
-						redirect('user/dashboard','refresh',301);
+						redirect('user','refresh',301);
 					}
 				}
 			} else {

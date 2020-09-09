@@ -22,6 +22,7 @@
 									<th>User Id</th>
 									<th>Name</th>
 									<th>Mobile Number</th>
+									<th>DOB</th>
 									<th>Number Of Post</th>
 									<th>Status</th>
 									<th width="20px">Edit</th>
@@ -31,23 +32,24 @@
 							<tbody>
 								<?php foreach ($user_details as $user) {?>
 									<tr>
-										<td class="align-middle py-1"><?php echo $user->id; ?></td>
-										<td class="align-middle py-1"><?php echo $user->first_name." ".$user->last_name; ?></td>
-										<td class="align-middle py-1"><?php echo $user->mobile_number; ?></td>
-										<td class="align-middle py-1">3</td>
+										<td class="align-middle py-1"><?php echo $user->user_id; ?></td>
+										<td class="align-middle py-1"><?php echo $user->fname." ".$user->lname; ?></td>
+										<td class="align-middle py-1"><?php echo $user->mobile; ?></td>
+										<td class="align-middle py-1"><?php echo date('d M Y',strtotime($user->date_of_birth)); ?></td>
+										<td class="align-middle py-1"><?php echo $user->post_count; ?></td>
 										<td class="align-middle py-1">
-											<?php if ($user->user_status == '1') {?>
+											<?php if ($user->status == '1') {?>
 												<span class="badge badge-success">Active</span>
 											<?php } else { ?>
 												<span class="badge badge-danger">In-Active</span>
 											<?php } ?>
 										</td>
 										<td class="align-middle py-1">
-											<a href="<?= site_url('admin/edit-user/').$user->id;?>" class="btn btn-link btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+											<a href="<?= site_url('admin/edit-user/').$user->user_id;?>" class="btn btn-link btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
 										</td>
 										<td class="align-middle py-1">
 											<form action="<?= site_url('admin/delete-user'); ?>" method="post">
-												<button class="btn btn-link btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" name="delete" value="<?php echo $user->id; ?>"><i class="fa fa-trash"></i></button>
+												<button class="btn btn-link btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" name="delete" value="<?php echo $user->user_id; ?>"><i class="fa fa-trash"></i></button>
 											</form>
 										</td>
 									</tr>
