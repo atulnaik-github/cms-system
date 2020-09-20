@@ -5,7 +5,11 @@ class Userarea extends MY_Controller {
 
 	public function index()
 	{	
-		$this->userBackend('userarea/dashboard');
+		$para = $this->session->sessiondata['userid'];
+		$data['total_posts'] = $this->op->postCount($para);
+		$data['active_posts'] = $this->op->totalActivePost($para);
+		$data['inactive_posts'] = $this->op->total_InactivePost($para);
+		$this->userBackend('userarea/dashboard',$data,true);
 	}
 
 	// this will add the post
@@ -62,7 +66,7 @@ class Userarea extends MY_Controller {
 	public function edit_post()
 	{
 		if ($this->uri->segment(3)) {
-			$data = array('id' => $this->uri->segment(3));
+			$data = array('id' => $this->uri->segment(3),'user_id' => $this->session->sessiondata['userid']);
 			$result['postDetails'] = $this->op->get($this->TBLPOST,$data);
 			$para = array('status' => '1');
 			$result['postCategory'] = $this->op->get($this->TBLCATEGORY,$para);
@@ -97,6 +101,7 @@ class Userarea extends MY_Controller {
 						'post_title' => $formdata['post_title'], 
 						'category_id' => $formdata['post_category'], 
 						'post_img' => $folder,
+						'status' => $formdata['status'],
 						'post_description' => $formdata['post_description']
 					);
 					$para = array('id' => $this->input->post('post_id'));
@@ -112,6 +117,28 @@ class Userarea extends MY_Controller {
 				}
 			}
 			redirect('user/post-list','refresh',301);
+		}
+	}
+
+	// this will delete the post
+	public function deletePost()
+	{
+		if ($this->input->post('delete') == FALSE) {
+			$array = array('dangerMSG' => 'Something went wrong');
+			$this->session->set_userdata($array);
+			redirect('user/post-list','refresh',301);
+		} else {
+			$data = array('is_deleted' => '0');
+			$para = array('id' => $this->input->post('delete'));
+			if ($this->op->modify($this->TBLPOST,$para,$data)) {
+				$array = array('successMSG' => 'Post deleted successfully');
+				$this->session->set_userdata($array);
+				redirect('user/post-list','refresh',301);
+			} else {
+				$array = array('dangerMSG' => 'Something went wrong');
+				$this->session->set_userdata($array);
+				redirect('user/post-list','refresh',301);
+			}
 		}
 	}
 
@@ -220,4 +247,5 @@ class Userarea extends MY_Controller {
 			}
 		}
 	}
+
 }

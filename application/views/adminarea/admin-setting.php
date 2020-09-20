@@ -25,7 +25,7 @@
       <div class="tab-content">
         <div class="tab-pane active" id="user-timeline">
           <div class="tile user-settings">
-            <h4 class="line-head">Basic Details</h4>
+            <h4 class="line-head">Basic Details <small>(You can update your details)</small></h4>
             <form action="<?= site_url('admin/admin-setting'); ?>" method="post">
               <div class="row mb-2">
                 <div class="col-md-4">

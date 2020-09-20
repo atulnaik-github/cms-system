@@ -1,14 +1,14 @@
-    <title><?php echo adminTitle."Post List"; ?></title>
+    <title><?php echo adminTitle."Total Post List"; ?></title>
     <main class="app-content">
 		<?php $this->load->view('adminarea/includes/alert-message'); ?>
     	<div class="app-title">
     		<div>
-    			<h1><i class="fa fa-th-list"></i> Post List</h1>
+    			<h1><i class="fa fa-th-list"></i> Total Post List</h1>
     		</div>
     		<ul class="app-breadcrumb breadcrumb side">
     			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-    			<li class="breadcrumb-item">Post</li>
-    			<li class="breadcrumb-item active"><a href="<?= site_url('admin/post-list'); ?>">Post List</a></li>
+    			<li class="breadcrumb-item">Dashboard</li>
+    			<li class="breadcrumb-item active"><a href="<?= site_url('admin/total-posts'); ?>">Total Post List</a></li>
     		</ul>
     	</div>
     	<div class="row">
@@ -32,34 +32,34 @@
     								</tr>
     							</thead>
     							<tbody>
-    								<?php $count = 1; foreach ($post_data as $post_details) {?>
+    								<?php $count = 1; foreach ($postDetails as $post) {?>
 	    								<tr>
                                             <td><?php echo $count;?></td>
-	    									<td class="align-middle py-1"><?php echo $post_details->id; ?></td>
-	    									<td class="align-middle py-1"><?php echo date('d M, Y',strtotime($post_details->created_at)); ?></td>
-	    									<td class="align-middle py-1"><?php echo $post_details->post_title; ?></td>
-	    									<td class="align-middle py-1"><?php echo $post_details->category_name; ?></td>
-	    									<td class="align-middle py-1"><?php echo $post_details->first_name." ".$post_details->last_name; ?></td>
+	    									<td class="align-middle py-1"><?php echo $post->id; ?></td>
+	    									<td class="align-middle py-1"><?php echo date('d M, Y',strtotime($post->created_at)); ?></td>
+	    									<td class="align-middle py-1"><?php echo $post->post_title; ?></td>
+	    									<td class="align-middle py-1"><?php echo $post->category_name; ?></td>
+	    									<td class="align-middle py-1"><?php echo $post->first_name." ".$post->last_name; ?></td>
 	    									<td class="align-middle py-1">
-                                                <?php if ($post_details->status == '1') {?>
+                                                <?php if ($post->status == '1') {?>
 	    										<span class="badge badge-success">Active</span>
                                                 <?php } else { ?>
 	    										<span class="badge badge-danger">In-Active</span>
                                                 <?php } ?>
 	    									</td>
 	    									<!-- <td class="align-middle py-1">
-                                                <?php if ($post_details->is_deleted == '1') {?>
+                                                <?php if ($post->is_deleted == '1') {?>
 	    										<span class="badge badge-success">Live</span>
                                                 <?php } else { ?>
 	    										<span class="badge badge-danger">Dead</span>
                                                 <?php } ?>
 	    									</td> -->
                                             <td class="align-middle py-1">
-                                                <a href="<?= site_url('admin/edit-post/').$post_details->id; ?>" class="btn btn-link btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                <a href="<?= site_url('admin/edit-post/').$post->id; ?>" class="btn btn-link btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
                                             </td>
 	    									<td class="align-middle py-1">
               									<form action="<?= site_url('admin/delete-post'); ?>" method="post">
-                                                    <button class="btn btn-link btn-sm" name="delete" value="<?php echo $post_details->id; ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
+                                                    <button class="btn btn-link btn-sm" name="delete" value="<?php echo $post->id; ?>" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></button>
                                                 </form>
 	    									</td>
 	    								</tr>

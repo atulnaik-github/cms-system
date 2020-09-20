@@ -35,7 +35,7 @@
 										<td class="align-middle py-1"><?php echo $user->user_id; ?></td>
 										<td class="align-middle py-1"><?php echo $user->fname." ".$user->lname; ?></td>
 										<td class="align-middle py-1"><?php echo $user->mobile; ?></td>
-										<td class="align-middle py-1"><?php echo date('d M Y',strtotime($user->date_of_birth)); ?></td>
+										<td class="align-middle py-1"><?php echo date('d M, Y',strtotime($user->date_of_birth)); ?></td>
 										<td class="align-middle py-1"><?php echo $user->post_count; ?></td>
 										<td class="align-middle py-1">
 											<?php if ($user->status == '1') {?>

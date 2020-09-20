@@ -1,14 +1,14 @@
-    <title><?php echo adminTitle."Post List"; ?></title>
+    <title><?php echo adminTitle."In-Active Post List"; ?></title>
     <main class="app-content">
 		<?php $this->load->view('adminarea/includes/alert-message'); ?>
     	<div class="app-title">
     		<div>
-    			<h1><i class="fa fa-th-list"></i> Post List</h1>
+    			<h1><i class="fa fa-th-list"></i> In-Active Post List</h1>
     		</div>
     		<ul class="app-breadcrumb breadcrumb side">
     			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-    			<li class="breadcrumb-item">Post</li>
-    			<li class="breadcrumb-item active"><a href="<?= site_url('admin/post-list'); ?>">Post List</a></li>
+    			<li class="breadcrumb-item">Dashboard</li>
+    			<li class="breadcrumb-item active"><a href="<?= site_url('admin/total-inactive-post'); ?>">Total In-Active Post</a></li>
     		</ul>
     	</div>
     	<div class="row">
@@ -32,7 +32,7 @@
     								</tr>
     							</thead>
     							<tbody>
-    								<?php $count = 1; foreach ($post_data as $post_details) {?>
+    								<?php $count = 1; foreach ($postDetails as $post_details) {?>
 	    								<tr>
                                             <td><?php echo $count;?></td>
 	    									<td class="align-middle py-1"><?php echo $post_details->id; ?></td>

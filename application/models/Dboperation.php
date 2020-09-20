@@ -76,12 +76,25 @@
       		return $result->result();
       	}
 
+            // this will get the total post details with author and coategory name
+            public function totalPostDetails()
+            {
+                  $this->db->select('tbl_posts.id,tbl_posts.created_at,tbl_posts.post_title,tbl_posts.category_id,tbl_posts.user_id,tbl_posts.is_deleted,tbl_posts.status,tbl_category.category_name,tbl_users.first_name,tbl_users.last_name')
+                              ->join('tbl_category','tbl_posts.category_id = tbl_category.id')
+                              ->join('tbl_users','tbl_posts.user_id = tbl_users.id')
+                              ->where('tbl_posts.is_deleted !=','0');
+                              $result = $this->db->get('tbl_posts');
+                              return $result->result();
+                              
+            }
+
       	// this will get the details of post with category name and author(post author) name
-      	public function getPostDetails()
+      	public function getPostDetails($para)
       	{
       		$this->db->select('tbl_posts.id,tbl_posts.created_at,tbl_posts.post_title,tbl_posts.category_id,tbl_posts.user_id,tbl_posts.is_deleted,tbl_posts.status,tbl_category.category_name,tbl_users.first_name,tbl_users.last_name')
       				->join('tbl_category','tbl_posts.category_id = tbl_category.id')
-      				->join('tbl_users','tbl_posts.user_id = tbl_users.id');
+      				->join('tbl_users','tbl_posts.user_id = tbl_users.id')
+                              ->where('user_id',$para);
       				$result = $this->db->get('tbl_posts');
       				return $result->result();
       				
@@ -93,8 +106,8 @@
       		$this->db->select('tbl_posts.id,tbl_posts.created_at,tbl_posts.post_title,tbl_posts.category_id,tbl_posts.user_id,tbl_posts.is_deleted,tbl_posts.status,tbl_category.category_name,tbl_users.first_name,tbl_users.last_name')
       				->join('tbl_category','tbl_posts.category_id = tbl_category.id')
       				->join('tbl_users','tbl_posts.user_id = tbl_users.id')
-      				->where('is_deleted','1')
-      				->where('user_id',$para);
+      				->where('user_id',$para)
+                              ->where('is_deleted','1');
       				$result = $this->db->get('tbl_posts');
       				return $result->result();
       				
@@ -130,9 +143,109 @@
       	public function totalPost()
       	{
       		$this->db->select('count(tbl_posts.id) as total_posts');
+                  $this->db->where('is_deleted', '1');
       		$result = $this->db->get('tbl_posts');
       		return $result->result();
       	}
+
+            // this will get the user wise total posts 
+            public function postCount($para)
+            {
+                  $this->db->select('count(tbl_posts.id) as total_posts');
+                  $this->db->where('user_id', $para);
+                  $this->db->where('is_deleted', '1');
+                  $query = $this->db->get('tbl_posts');
+                  return $query->result();
+            }
+
+            // this will get the total active posts user wise
+            public function totalActivePost($para)
+            {
+                  $this->db->select('count(tbl_posts.id) as total_active_posts');
+                  $this->db->where('user_id', $para);
+                  $this->db->where('status', '1');
+                  $this->db->where('is_deleted', '1');
+                  $query = $this->db->get('tbl_posts');
+                  return $query->result();
+            }
+
+            // this will get the total in-active posts user wise
+            public function total_InactivePost($para)
+            {
+                  $this->db->select('count(tbl_posts.id) as total_inactive_posts');
+                  $this->db->where('user_id', $para);
+                  $this->db->where('status', '0');
+                  $query = $this->db->get('tbl_posts');
+                  return $query->result();
+            }
+
+             // this will get the total active posts 
+            public function total_Active_Post()
+            {
+                  $this->db->select('count(tbl_posts.id) as total_active_posts');
+                  $this->db->where('status', '1');
+                  $this->db->where('is_deleted', '1');
+                  $query = $this->db->get('tbl_posts');
+                  return $query->result();
+            }
+
+            // this will get the total in-active posts 
+            public function total_Inactive_Post()
+            {
+                  $this->db->select('count(tbl_posts.id) as total_inactive_posts');
+                  $this->db->where('status', '0');
+                  $this->db->where('is_deleted', '1');
+                  $query = $this->db->get('tbl_posts');
+                  return $query->result();
+            }
+
+            // this will get the total deleted posts 
+            public function deletedPosts()
+            {
+                  $this->db->select('count(tbl_posts.id) as total_deleted_posts');
+                  $this->db->where('is_deleted', '0');
+                  $query = $this->db->get('tbl_posts');
+                  return $query->result();
+            }
+
+            // this will get the total active post list
+            public function totalActivePostList()
+            {
+                  $this->db->select('tbl_posts.id,tbl_posts.created_at,tbl_posts.post_title,tbl_posts.category_id,tbl_posts.user_id,tbl_posts.is_deleted,tbl_posts.status,tbl_category.category_name,tbl_users.first_name,tbl_users.last_name')
+                              ->join('tbl_category','tbl_posts.category_id = tbl_category.id')
+                              ->join('tbl_users','tbl_posts.user_id = tbl_users.id')
+                              ->where('tbl_posts.status !=','0')
+                              ->where('tbl_posts.is_deleted !=','0');
+                              $result = $this->db->get('tbl_posts');
+                              return $result->result();
+                              
+            }
+
+            // this will get the total in-active post list
+            public function totalInActivePostList()
+            {
+                  $this->db->select('tbl_posts.id,tbl_posts.created_at,tbl_posts.post_title,tbl_posts.category_id,tbl_posts.user_id,tbl_posts.is_deleted,tbl_posts.status,tbl_category.category_name,tbl_users.first_name,tbl_users.last_name')
+                              ->join('tbl_category','tbl_posts.category_id = tbl_category.id')
+                              ->join('tbl_users','tbl_posts.user_id = tbl_users.id')
+                              ->where('tbl_posts.status =','0')
+                              ->where('tbl_posts.is_deleted !=','0');
+                              $result = $this->db->get('tbl_posts');
+                              return $result->result();
+                              
+            }
+
+            // this will get the total deleted post list
+            public function totalDeletedPostList()
+            {
+                  $this->db->select('tbl_posts.id,tbl_posts.created_at,tbl_posts.post_title,tbl_posts.category_id,tbl_posts.user_id,tbl_posts.is_deleted,tbl_posts.status,tbl_category.category_name,tbl_users.first_name,tbl_users.last_name')
+                              ->join('tbl_category','tbl_posts.category_id = tbl_category.id')
+                              ->join('tbl_users','tbl_posts.user_id = tbl_users.id')
+                              ->where('tbl_posts.is_deleted !=','1');
+                              $result = $this->db->get('tbl_posts');
+                              return $result->result();
+                              
+            }
+
 	}
 	
 

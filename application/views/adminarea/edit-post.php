@@ -4,7 +4,7 @@
     <?php foreach ($post_details as $post) {?>
 	<div class="app-title">
 		<div>
-			<h1><i class="fa fa-edit"></i> Create New Post</h1>
+			<h1><i class="fa fa-edit"></i> Edit Post</h1>
 		</div>
 		<ul class="app-breadcrumb breadcrumb">
 			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -21,7 +21,7 @@
                             <input type="hidden" value="<?php echo $post->id; ?>" name="post_id" id="post_id">
 							<div class="form-group mb-4">
 								<label for="post_title">Post Title</label>
-								<input class="form-control" id="post_title" name="post_title" value="<?php echo $post->post_title; ?>" type="text" placeholder="Enter post title" required />
+								<input class="form-control" id="post_title" name="post_title" value="<?php echo $post->post_title; ?>" type="text" placeholder="Enter post title" required/>
                             </div>
 							<div class="form-group mb-4">
 								<label for="post_category">Post Category</label>

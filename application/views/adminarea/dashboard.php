@@ -12,24 +12,66 @@
       <div class="row">
         <?php foreach ($user as $users): ?>
           <div class="col-md-6 col-lg-3">
+           <a href="<?= site_url('admin/user-list'); ?>">
             <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
               <div class="info">
-                <h4>Users</h4>
+                <h5>Total Users</h5>
                 <p><b><?php echo $users->total_users; ?></b></p>
               </div>
             </div>
-          </div>
-        <?php endforeach ?>
-        <?php foreach ($post as $posts): ?>
-          <div class="col-md-6 col-lg-3">
+          </a>
+        </div>
+      <?php endforeach ?>
+      <?php foreach ($post as $posts): ?>
+        <div class="col-md-6 col-lg-3">
+          <a href="<?= site_url('admin/total-posts'); ?>">
             <div class="widget-small warning coloured-icon"><i class="icon fa fa-file-text fa-3x"></i>
               <div class="info">
-                <h4>Total Post</h4>
+                <h5>Total Post</h5>
                 <p><b><?php echo $posts->total_posts; ?></b></p>
               </div>
             </div>
-          </div>
-        <?php endforeach ?>
+          </a>
+        </div>
+      <?php endforeach ?>
+      <?php foreach ($active_posts as $active_post): ?>
+        <div class="col-md-6 col-lg-3">
+          <a href="<?= site_url('admin/total-active-post'); ?>">
+            <div class="widget-small primary coloured-icon"><i class="icon fa fa-file-text fa-3x"></i>
+              <div class="info">
+                <h5>Total Active Post</h5>
+                <p><b><?php echo $active_post->total_active_posts; ?></b></p>
+              </div>
+            </div>
+          </a>
+        </div>
+      <?php endforeach ?>
+      <?php foreach ($inactive_posts as $inactive_post): ?>
+        <div class="col-md-6 col-lg-3">
+          <a href="<?= site_url('admin/total-inactive-post'); ?>">
+            <div class="widget-small danger coloured-icon"><i class="icon fa fa-file-text fa-3x"></i>
+              <div class="info">
+                <h5>Total In-Active Post</h5>
+                <p><b><?php echo $inactive_post->total_inactive_posts; ?></b></p>
+              </div>
+            </div>
+          </a>
+        </div>
+      <?php endforeach ?>
+      <?php foreach ($deleted_posts as $deleted_post): ?>
+        <div class="col-md-6 col-lg-3">
+          <a href="<?= site_url('admin/total-deleted-post'); ?>">
+            <div class="widget-small danger coloured-icon"><i class="icon fa fa-file-text fa-3x"></i>
+              <div class="info">
+                <h5>Total Deleted Post</h5>
+                <div>
+                  <p class="float-left"><b><?php echo $deleted_post->total_deleted_posts; ?></b></p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      <?php endforeach ?>
         <!-- <div class="col-md-6 col-lg-3">
           <div class="widget-small info coloured-icon"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
             <div class="info">

@@ -1,28 +1,28 @@
 <title><?php echo userTitle."Edit Post"; ?></title>
-    <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1>Create New Post</h1>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li><a href="<?= site_url('user'); ?>">Dashboard</a></li>
-                        <li><a href="javascript:void(0);">Post</a></li>
-                        <li class="active">Add Post</li>
-                    </ol>
-                </div>
+<div class="breadcrumbs">
+    <div class="col-sm-4">
+        <div class="page-header float-left">
+            <div class="page-title">
+                <h1>Create New Post</h1>
             </div>
         </div>
     </div>
+    <div class="col-sm-8">
+        <div class="page-header float-right">
+            <div class="page-title">
+                <ol class="breadcrumb text-right">
+                    <li><a href="<?= site_url('user'); ?>">Dashboard</a></li>
+                    <li><a href="javascript:void(0);">Post</a></li>
+                    <li class="active">Add Post</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <div class="content mt-3">
-        <div class="animated fadeIn">
-            <?php foreach ($postDetails as $post): ?>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <?php foreach ($postDetails as $post): ?>
             <form action="<?= site_url('user/edit-post'); ?>" enctype="multipart/form-data" method="post">
                 <div class="row">
                     <div class="col-lg-8">
@@ -49,10 +49,19 @@
                                     </select>
                                     <small><?php echo form_error('post_category'); ?></small>
                                 </div>
-                                <div class="form-group mb-4">
-                                    <label for="post_img">Post Image</label>
-                                    <input class="form-control-file" id="post_img" name="post_img"  onChange="displayImage(this)" accept="image/*" type="file">
-                                    <input class="form-control-file" id="old_img" name="old_img"  onChange="displayImage(this)" accept="image/*" type="hidden" value="<?php echo $post->post_img; ?>">
+                                <div class="form-group mb-4 row">
+                                    <div class="col-md-6">
+                                        <label for="post_img">Post Image</label>
+                                        <input class="form-control-file form-control" id="post_img" name="post_img"  onChange="displayImage(this)" accept="image/*" type="file">
+                                        <input class="form-control-file" id="old_img" name="old_img"  onChange="displayImage(this)" accept="image/*" type="hidden" value="<?php echo $post->post_img; ?>">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="status">Status</label>
+                                        <select name="status" id="status" class="form-control">
+                                            <option value="1" <?php if ($post->status == '1'):?>selected=""<?php endif;?>>Active</option>
+                                            <option value="0" <?php if ($post->status == '0'):?>selected=""<?php endif;?>>In-Active</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -92,24 +101,24 @@
                     </div>
                 </div>
             </form>
-            <?php endforeach ?>
-        </div><!-- .animated -->
-    </div><!-- .content -->
+        <?php endforeach ?>
+    </div><!-- .animated -->
+</div><!-- .content -->
 </div><!-- /#right-panel -->
 <!-- Right Panel -->
 
 <script>
     function triggerClick(e) {
       document.querySelector('#post_img').click();
-    }
-    function displayImage(e) {
+  }
+  function displayImage(e) {
       if (e.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e){
           document.querySelector('#post_display').setAttribute('src', e.target.result);
-        }
-        reader.readAsDataURL(e.files[0]);
       }
-    }
+      reader.readAsDataURL(e.files[0]);
+  }
+}
 </script>
 

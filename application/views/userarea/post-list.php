@@ -33,25 +33,27 @@
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered text-capitalize">
                             <thead>
                                 <tr>
+                                    <th>Sr.No</th>
                                     <th width="60px">Post Id</th>
                                     <th>Date</th>
                                     <th>Post Title</th>
                                     <th>Category</th>
-                                    <th>Post Author</th>
+                                    <!-- <th>Post Author</th> -->
                                     <th>Status</th>
-                                    <th>Is_deleted</th>
+                                    <!-- <th>Is_deleted</th> -->
                                     <th width="20px">Edit</th>
                                     <th width="20px">Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($postDetails as $post) {?>
+                                <?php $count = 1; foreach ($postDetails as $post) {?>
                                     <tr>
+                                        <td><?php echo $count; ?></td>
                                         <td><?php echo $post->id; ?></td>
                                         <td><?php echo date('d M, Y', strtotime($post->created_at)); ?></td>
                                         <td><?php echo $post->post_title; ?></td>
                                         <td><?php echo $post->category_name; ?></td>
-                                        <td><?php echo $post->first_name." ".$post->last_name; ?></td>
+                                        <!-- <td><?php echo $post->first_name." ".$post->last_name; ?></td> -->
                                         <td>
                                             <?php if ($post->status == '1') { ?>
                                                 <span class="badge bg-success text-white">Active</span>   
@@ -59,28 +61,28 @@
                                                 <span class="badge bg-danger text-white">In-Active</span>
                                             <?php } ?>
                                         </td>
-                                        <td>
+                                       <!--  <td>
                                             <?php if ($post->is_deleted == '1') { ?>
                                                 <span class="badge bg-success text-white">Live</span>   
                                             <?php }else {?>
                                                 <span class="badge bg-danger text-white">Dead</span>
                                             <?php } ?>
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <a href="<?= site_url('user/edit-post/').$post->id; ?>" class="btn-sm btn btn-primary" data-toggle="tooltip" title="Edit Post">Edit</a>
                                         </td>
                                         <td>
-                                            <button class="btn-sm btn btn-secondary" data-toggle="tooltip" title="Delete Post">Delete</button>
+                                            <form action="<?= site_url('user/delete-post'); ?>" method="post">
+                                                <button class="btn-sm btn btn-secondary" name="delete" data-toggle="tooltip" title="Delete Post" type="submit" value="<?php echo $post->id; ?>">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
-                                <?php } ?>
+                                <?php $count++; } ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div><!-- .animated -->
 </div><!-- .content -->

@@ -13,6 +13,9 @@ class Adminarea extends MY_Controller {
 	{	
 		$data['user'] = $this->op->totalUsers();
 		$data['post'] = $this->op->totalPost();
+		$data['active_posts'] = $this->op->total_Active_Post();
+		$data['inactive_posts'] = $this->op->total_Inactive_Post();
+		$data['deleted_posts'] = $this->op->deletedPosts();
 		$this->adminBackend('adminarea/dashboard',$data,true);
 	}
 
@@ -63,8 +66,9 @@ class Adminarea extends MY_Controller {
 
 	// this will display the posts list
 	public function post_list()
-	{
-		$data['post_data'] = $this->op->getPostDetails();
+	{	
+		$para = $this->session->sessiondata['userid'];
+		$data['post_data'] = $this->op->getPostDetails($para);
 		$this->adminBackend('adminarea/post-list',$data,true);
 	}
 
@@ -74,7 +78,8 @@ class Adminarea extends MY_Controller {
 		if ($this->uri->segment(3)) {
 			$para = array('id' => $this->uri->segment(3));
 			$data['post_details']= $this->op->get($this->TBLPOST,$para);
-			$data['category_details']= $this->op->getTable($this->TBLCATEGORY);
+			$para = array('status' => '1');
+			$data['category_details']= $this->op->get($this->TBLCATEGORY,$para);
 			if (!empty($data['post_details'])) {
 				$this->adminBackend('adminarea/edit-post',$data,true);
 			} else {
@@ -83,48 +88,43 @@ class Adminarea extends MY_Controller {
 				redirect('admin/post-list','refresh',301);
 			}
 		} else {
-			if ($this->form_validation->run('add_post') == FALSE) {
-				redirect($this->agent->referrer());
+			
+			if ($this->input->post('submit') == false) {
+				$msg = array('dangerMSG' => 'Something went wrong...');
+				$this->session->set_userdata($msg);
+				redirect('admin/post-list','refresh',301);
 			} else {
-				if ($this->input->post('submit') == false) {
-					$msg = array('dangerMSG' => 'Something went wrong...');
+				$formdata = $this->input->post();
+				if (!empty($_FILES['post_img']['name'])) {
+					$date = 'IMG'.date('Ymdhis');
+					$filename = $_FILES["post_img"]["name"];
+					$temp_name = $_FILES["post_img"]["tmp_name"];
+					$filename = $date;
+					$folder = 'upload/post/'.$filename;
+					$save_file = move_uploaded_file($temp_name, $folder);
+				} else {
+					$folder = $formdata['old_img'];
+				}
+				$data = array(
+					'post_title' => $formdata['post_title'],
+					'category_id' => $formdata['post_category'],
+					'post_img' => $folder,
+					'status' => $formdata['status'],
+					'is_deleted' => $formdata['is_deleted'],
+					'post_description' => $formdata['post_description']
+				);
+				$para = array('id' => $this->input->post('post_id'));
+				if ($this->op->modify($this->TBLPOST,$para,$data)) {
+					$msg = array('successMSG' => 'Post edited successfully');
 					$this->session->set_userdata($msg);
 					redirect('admin/post-list','refresh',301);
 				} else {
-					$formdata = $this->input->post();
-					if (!empty($_FILES['post_img']['name'])) {
-						$date = 'IMG'.date('Ymdhis');
-						$filename = $_FILES["post_img"]["name"];
-						$temp_name = $_FILES["post_img"]["tmp_name"];
-						$filename = $date;
-						$folder = 'upload/post/'.$filename;
-						$save_file = move_uploaded_file($temp_name, $folder);
-					} else {
-						$folder = $formdata['old_img'];
-					}
-					$data = array(
-						'post_title' => $formdata['post_title'],
-						'category_id' => $formdata['post_category'],
-						'post_img' => $folder,
-						'status' => $formdata['status'],
-						'is_deleted' => $formdata['is_deleted'],
-						'post_description' => $formdata['post_description']
-					);
-					$para = array('id' => $this->input->post('post_id'));
-					if ($this->op->modify($this->TBLPOST,$para,$data)) {
-						$msg = array('successMSG' => 'Post edited successfully');
-						$this->session->set_userdata($msg);
-						redirect('admin/post-list','refresh',301);
-					} else {
-						$msg = array('dangerMSG' => 'Something went wrong');
-						$this->session->set_userdata($msg);
-						redirect('admin/post-list','refresh',301);
-					}
-				}	
-			}
-			$msg = array('dangerMSG' => 'Something went wrong');
-			$this->session->set_userdata($msg);
-			redirect('admin/post-list','refresh',301);
+					$msg = array('dangerMSG' => 'Something went wrong');
+					$this->session->set_userdata($msg);
+					redirect('admin/post-list','refresh',301);
+				}
+			}	
+			
 		}
 	}
 
@@ -420,9 +420,7 @@ class Adminarea extends MY_Controller {
 				$this->session->set_userdata($msg);
 				redirect('admin/user-list','refresh',301);	
 			}
-			
 		}	
-		
 	}
 
 	// this will update the admin basic details
@@ -454,7 +452,6 @@ class Adminarea extends MY_Controller {
 					redirect('admin/admin-setting','refresh',301);
 				}
 			}
-			
 		}
 	}
 
@@ -497,7 +494,6 @@ class Adminarea extends MY_Controller {
 					redirect('admin/change-password');
 				}
 			}
-			
 		}				
 	}
 
@@ -529,7 +525,36 @@ class Adminarea extends MY_Controller {
 			}
 			
 		}
-		
 	}
-	
+
+	// this will display the total posts
+	public function total_posts()
+	{
+		$data['postDetails'] = $this->op->totalPostDetails();
+		$this->adminBackend('adminarea/total-posts',$data,true);
+	}
+
+	// this will display the total active post list
+	public function total_active_post()
+	{	
+		$data['postDetails'] = $this->op->totalActivePostList();
+		// $para = array('status' => , '1');
+		$this->adminBackend('adminarea/total-active-post',$data,true);
+	}
+
+	// this will display the total in-active post list
+	public function total_inactive_post()
+	{	
+		$data['postDetails'] = $this->op->totalInActivePostList();
+		// $para = array('status' => , '1');
+		$this->adminBackend('adminarea/total-inactive-post',$data,true);
+	}
+
+	// this will display the total Deleted post list
+	public function total_deleted_post()
+	{	
+		$data['postDetails'] = $this->op->totalDeletedPostList();
+		// $para = array('status' => , '1');
+		$this->adminBackend('adminarea/total-deleted-post',$data,true);
+	}
 }

@@ -9,7 +9,7 @@
       </div>
     <?php } ?>
   </div>
-  <div class="col-lg-9">
+  <div class="col-lg-12">
     <?php if ($this->session->userdata('dangerMSG')) { ?>
       <div class="bs-component">
         <div class="alert alert-dismissible  alert-danger">
@@ -19,7 +19,7 @@
       </div>
     <?php } ?>
   </div>
-  <div class="col-lg-9">
+  <div class="col-lg-12">
     <?php if ($this->session->userdata('infoMSG')) { ?>
       <div class="bs-component">
         <div class="alert alert-dismissible alert-info">
@@ -29,7 +29,7 @@
       </div>
     <?php } ?>
   </div>
-  <div class="col-lg-9">
+  <div class="col-lg-12">
     <?php if ($this->session->userdata('warningMSG')) { ?>
       <div class="bs-component">
         <div class="alert alert-dismissible alert-warning">
