@@ -77,10 +77,6 @@ $route['admin/delete-user'] = 'Adminarea/deleteUser';
 $route['admin/admin-setting'] = 'Adminarea/admin_setting';
 $route['admin/change-password'] = 'Adminarea/changePassword';
 $route['admin/change-profile-image'] = 'Adminarea/changeProfileImage';
-$route['admin/total-posts'] = 'Adminarea/total_posts';
-$route['admin/total-active-post'] = 'Adminarea/total_active_post';
-$route['admin/total-inactive-post'] = 'Adminarea/total_inactive_post';
-$route['admin/total-deleted-post'] = 'Adminarea/total_deleted_post';
 
 
 // user routes

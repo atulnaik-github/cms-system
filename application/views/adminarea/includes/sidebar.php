@@ -15,7 +15,7 @@
       </a>
     </li>
     <li class="treeview">
-      <a class="app-menu__item" href="#" data-toggle="treeview">
+      <a class="app-menu__item" href="javascript:void(0)" data-toggle="treeview">
         <i class="app-menu__icon fa fa-file-text"></i>
         <span class="app-menu__label">Post</span>
         <i class="treeview-indicator fa fa-angle-right"></i>
@@ -27,7 +27,7 @@
     </li>
     <!-- <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a></li> -->
     <li class="treeview">
-      <a class="app-menu__item" href="#" data-toggle="treeview">
+      <a class="app-menu__item" href="javascript:void(0)" data-toggle="treeview">
         <i class="app-menu__icon fa fa-th-list"></i>
         <span class="app-menu__label">Category</span>
         <i class="treeview-indicator fa fa-angle-right"></i>
@@ -38,7 +38,7 @@
       </ul>
     </li>
     <li class="treeview">
-      <a class="app-menu__item" href="#" data-toggle="treeview">
+      <a class="app-menu__item" href="javascript:void(0)" data-toggle="treeview">
         <i class="app-menu__icon fa fa-user"></i>
         <span class="app-menu__label">Users</span>
         <i class="treeview-indicator fa fa-angle-right"></i>

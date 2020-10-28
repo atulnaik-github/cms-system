@@ -6,6 +6,8 @@ class Adminarea extends MY_Controller {
 	public function index()
 	{	
 		$loginData['loginUser'] = $this->getAuthUser();
+		$username = array('email' => $this->session->sessiondata['username']);
+		$loginData['loginTime'] = $this->op->getLastLoginTime($username,$this->TBLLOGINLOGS);
 		$this->adminBackend('adminarea/landing-page',$loginData,true);
 	}
 
@@ -67,8 +69,8 @@ class Adminarea extends MY_Controller {
 	// this will display the posts list
 	public function post_list()
 	{	
-		$para = $this->session->sessiondata['userid'];
-		$data['post_data'] = $this->op->getPostDetails($para);
+		// $para = $this->session->sessiondata['userid'];
+		$data['post_data'] = $this->op->totalPostDetails();
 		$this->adminBackend('adminarea/post-list',$data,true);
 	}
 
@@ -115,7 +117,7 @@ class Adminarea extends MY_Controller {
 				);
 				$para = array('id' => $this->input->post('post_id'));
 				if ($this->op->modify($this->TBLPOST,$para,$data)) {
-					$msg = array('successMSG' => 'Post edited successfully');
+					$msg = array('successMSG' => 'Post updated successfully');
 					$this->session->set_userdata($msg);
 					redirect('admin/post-list','refresh',301);
 				} else {
@@ -198,12 +200,6 @@ class Adminarea extends MY_Controller {
 			}
 			
 		} else {
-			if ($this->form_validation->run('add_category') == FALSE) {
-				redirect($this->agent->referrer());
-				// $para = array('id' => $this->uri->segment(3));
-				// $categoryData['category_data'] = $this->op->get($this->TBLCATEGORY,$para);
-				// $this->adminBackend('adminarea/edit-category',$categoryData,true);
-			} else {
 				if ($this->input->post('submit')) {
 					$formData = $this->input->post();
 					$data = array(
@@ -225,7 +221,6 @@ class Adminarea extends MY_Controller {
 					$this->session->set_userdata($msg);
 					redirect('admin/category-list','refresh',301);
 				}
-			}
 			$msg = array('warningMSG' => 'Access denied...');				
 			$this->session->set_userdata($msg);
 			redirect('admin/category-list','refresh',301);
@@ -340,14 +335,6 @@ class Adminarea extends MY_Controller {
 				redirect('admin/user-list','refresh',301);
 			}
 		} else {
-			if ($this->form_validation->run('add_user') == FALSE) {
-				redirect($this->agent->referrer());
-				// $para = array('id' => $formdata['user_id']);
-				// $para = array('id' => $this->uri->segment(3));
-				// $data['users'] = $this->op->get($this->TBLUSERS,$para);
-				// $data['country'] = $this->op->getTable($this->TBLCOUNTRY);
-				// $this->adminBackend('adminarea/edit-user',$data,true);
-			} else {
 				if ($this->input->post('submit') == FALSE) {
 					$msg = array('dangerMSG' => 'Something went wrong');
 					$this->session->set_userdata($msg);
@@ -395,7 +382,6 @@ class Adminarea extends MY_Controller {
 						redirect('admin/user-list','refresh',301);
 					}
 				}
-			}
 			$msg = array('dangerMSG' => 'Something went wrong');
 			$this->session->set_userdata($msg);
 			redirect('admin/user-list','refresh',301);
@@ -527,34 +513,5 @@ class Adminarea extends MY_Controller {
 		}
 	}
 
-	// this will display the total posts
-	public function total_posts()
-	{
-		$data['postDetails'] = $this->op->totalPostDetails();
-		$this->adminBackend('adminarea/total-posts',$data,true);
-	}
 
-	// this will display the total active post list
-	public function total_active_post()
-	{	
-		$data['postDetails'] = $this->op->totalActivePostList();
-		// $para = array('status' => , '1');
-		$this->adminBackend('adminarea/total-active-post',$data,true);
-	}
-
-	// this will display the total in-active post list
-	public function total_inactive_post()
-	{	
-		$data['postDetails'] = $this->op->totalInActivePostList();
-		// $para = array('status' => , '1');
-		$this->adminBackend('adminarea/total-inactive-post',$data,true);
-	}
-
-	// this will display the total Deleted post list
-	public function total_deleted_post()
-	{	
-		$data['postDetails'] = $this->op->totalDeletedPostList();
-		// $para = array('status' => , '1');
-		$this->adminBackend('adminarea/total-deleted-post',$data,true);
-	}
 }

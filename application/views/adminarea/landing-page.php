@@ -26,11 +26,14 @@
           <h3 class="tile-title">Welcome</h3>
           <div class="tile-footer"></div>
           <div class="tile-body">
-            <ul class="list-unstyled">
-              <li><b>Last Login Date : </b></li>
-              <li><b>Current Date : <?php echo date('d-m-Y');?></b></li>
-              <li><b>Current Time : <?php echo date('h:i A');?></b></li>
-            </ul>
+            <?php foreach ($loginTime as $loginData) { ?>
+              <ul class="list-unstyled">
+                <li><b>Last Login Date :<?php echo date('d-m-Y',strtotime($loginData->login_time)); ?></b></li>
+                <li><b>Last Login Time :<?php echo date('h:i A',strtotime($loginData->login_time)); ?></b></li>
+            <?php } ?>
+                <li><b>Current Date : <?php echo date('d-m-Y');?></b></li>
+                <li><b>Current Time : <?php echo date('h:i A');?></b></li>
+              </ul>
           </div>
           <!-- <div class="tile-footer"><a class="btn btn-primary" href="#">Link</a></div> -->
         </div>

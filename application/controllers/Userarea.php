@@ -78,9 +78,7 @@ class Userarea extends MY_Controller {
 				redirect('user/post-list','refresh',301);
 			}
 		} else {
-			if ($this->form_validation->run('add_post') == FALSE) {
-				redirect($this->agent->referrer());
-			} else {
+			
 				if ($this->input->post('submit') == FALSE) {
 					$array = array('dangerMSG' => 'Something went wrong');
 					$this->session->set_userdata($array);
@@ -115,7 +113,8 @@ class Userarea extends MY_Controller {
 						redirect('user/post-list','refresh',301);
 					}
 				}
-			}
+			$array = array('dangerMSG' => 'Something went wrong');
+			$this->session->set_userdata($array);
 			redirect('user/post-list','refresh',301);
 		}
 	}

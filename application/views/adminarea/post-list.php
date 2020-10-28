@@ -26,7 +26,7 @@
     									<th>Category</th>
     									<th>Post Author</th>
     									<th>Status</th>
-    									<!-- <th>Is_deleted</th> -->
+    									<th>Is_deleted</th>
     									<th width="20px">Edit</th>
                                         <th width="20px">Delete</th>
     								</tr>
@@ -47,13 +47,13 @@
 	    										<span class="badge badge-danger">In-Active</span>
                                                 <?php } ?>
 	    									</td>
-	    									<!-- <td class="align-middle py-1">
+	    									<td class="align-middle py-1">
                                                 <?php if ($post_details->is_deleted == '1') {?>
 	    										<span class="badge badge-success">Live</span>
                                                 <?php } else { ?>
 	    										<span class="badge badge-danger">Dead</span>
                                                 <?php } ?>
-	    									</td> -->
+	    									</td>
                                             <td class="align-middle py-1">
                                                 <a href="<?= site_url('admin/edit-post/').$post_details->id; ?>" class="btn btn-link btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
                                             </td>

@@ -24,7 +24,7 @@
       <?php endforeach ?>
       <?php foreach ($post as $posts): ?>
         <div class="col-md-6 col-lg-3">
-          <a href="<?= site_url('admin/total-posts'); ?>">
+          <a href="#">
             <div class="widget-small warning coloured-icon"><i class="icon fa fa-file-text fa-3x"></i>
               <div class="info">
                 <h5>Total Post</h5>
@@ -36,7 +36,7 @@
       <?php endforeach ?>
       <?php foreach ($active_posts as $active_post): ?>
         <div class="col-md-6 col-lg-3">
-          <a href="<?= site_url('admin/total-active-post'); ?>">
+          <a href="#">
             <div class="widget-small primary coloured-icon"><i class="icon fa fa-file-text fa-3x"></i>
               <div class="info">
                 <h5>Total Active Post</h5>
@@ -48,7 +48,7 @@
       <?php endforeach ?>
       <?php foreach ($inactive_posts as $inactive_post): ?>
         <div class="col-md-6 col-lg-3">
-          <a href="<?= site_url('admin/total-inactive-post'); ?>">
+          <a href="#">
             <div class="widget-small danger coloured-icon"><i class="icon fa fa-file-text fa-3x"></i>
               <div class="info">
                 <h5>Total In-Active Post</h5>
@@ -60,7 +60,7 @@
       <?php endforeach ?>
       <?php foreach ($deleted_posts as $deleted_post): ?>
         <div class="col-md-6 col-lg-3">
-          <a href="<?= site_url('admin/total-deleted-post'); ?>">
+          <a href="#">
             <div class="widget-small danger coloured-icon"><i class="icon fa fa-file-text fa-3x"></i>
               <div class="info">
                 <h5>Total Deleted Post</h5>
